@@ -5,7 +5,7 @@ extends Node2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var sprite: Sprite2D = $Sprite
 
-var speed: float = 200.0
+var speed: float = 800.0
 
 func _physics_process(delta: float)-> void:
 	global_position += Vector2(1, 0).rotated(rotation) * speed * delta

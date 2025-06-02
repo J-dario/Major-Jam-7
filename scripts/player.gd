@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-const MOVEMENT_SPEED: float = 200.0
-const DODGE_SPEED: float = 300.0
+const MOVEMENT_SPEED: float = 500.0
+const DODGE_SPEED: float = 800.0
 const DODGE_DURATION: float = 0.3
 const IS_PLAYER: bool = true
 
