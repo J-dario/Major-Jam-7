@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://3mcmvgfcak6u"]
+[gd_scene load_steps=8 format=3 uid="uid://3mcmvgfcak6u"]
 
 [ext_resource type="PackedScene" uid="uid://hpahw4ei3nqg" path="res://scenes/player.tscn" id="2_cmw7p"]
 [ext_resource type="Texture2D" uid="uid://cchoimd72g3jh" path="res://sprites/TileSet.png" id="3_nhljj"]
 [ext_resource type="PackedScene" uid="uid://veohmyh2vp34" path="res://scenes/king.tscn" id="4_qsd7d"]
-[ext_resource type="Texture2D" uid="uid://cj0om01w5fbsa" path="res://sprites/bullet.png" id="4_y6ttt"]
+[ext_resource type="PackedScene" uid="uid://c3ki304dj4sh1" path="res://scenes/health_bar.tscn" id="4_y6ttt"]
+[ext_resource type="PackedScene" uid="uid://chkoyvpy2l6fw" path="res://scenes/player_health_bar.tscn" id="5_qsd7d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y6ttt"]
 texture = ExtResource("3_nhljj")
@@ -219,9 +220,15 @@ layer_1/tile_data = PackedInt32Array(262148, 327682, 7, 262149, 327682, 7, 32768
 [node name="player" parent="." instance=ExtResource("2_cmw7p")]
 position = Vector2(548, 296)
 
-[node name="Bullet" type="Sprite2D" parent="."]
-position = Vector2(703, -268)
-texture = ExtResource("4_y6ttt")
-
 [node name="King" parent="." instance=ExtResource("4_qsd7d")]
 position = Vector2(581, -293)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("4_y6ttt")]
+offset_left = 497.0
+offset_top = 868.0
+offset_right = 5032.0
+offset_bottom = 1308.0
+
+[node name="PlayerHealthBar" parent="CanvasLayer" instance=ExtResource("5_qsd7d")]
