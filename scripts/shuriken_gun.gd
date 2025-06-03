@@ -3,7 +3,6 @@ extends Node2D
 const bulletScene = preload("res://scenes/shurikenBullet.tscn")
 
 @onready var rotationOffset: Node2D = $RotationOffset
-@onready var shadow: Sprite2D = $RotationOffset/Sprite2D/Shadow
 @onready var shootPos: Marker2D = $RotationOffset/Sprite2D/shootPos
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -15,7 +14,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	rotationOffset.rotation = lerp_angle(rotationOffset.rotation, (get_global_mouse_position() - global_position).angle(), 6.5*delta)
-	shadow.position = Vector2(-2, 2).rotated(-rotationOffset.rotation)
 
 	if Input.is_action_just_pressed("shoot") and canShoot:
 		_shoot()

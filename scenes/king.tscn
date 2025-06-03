@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://veohmyh2vp34"]
+
+[ext_resource type="Script" uid="uid://c6unhxwu7tai3" path="res://scripts/king.gd" id="1_fn2xo"]
+[ext_resource type="Texture2D" uid="uid://dk4gojy0b1304" path="res://sprites/king.png" id="2_gmgs4"]
+[ext_resource type="PackedScene" uid="uid://dvn4vmwm0rsdv" path="res://scenes/staff.tscn" id="3_gmgs4"]
+
+[node name="King" type="Node2D"]
+script = ExtResource("1_fn2xo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gmgs4")
+region_enabled = true
+region_rect = Rect2(0, 0, 90, 170)
+
+[node name="Staff" parent="." instance=ExtResource("3_gmgs4")]
