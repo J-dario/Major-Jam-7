@@ -11,6 +11,7 @@ const boomScene = preload("res://scenes/shuriken_boom.tscn")
 
 var speed: float = 800.0
 var hasCollided = false
+var damage = 1
 
 func _physics_process(delta: float)-> void:
 	global_position += Vector2(1, 0).rotated(rotation) * speed * delta
@@ -22,6 +23,9 @@ func _physics_process(delta: float)-> void:
 		audio_stream_player_2d.play()
 		sprite.visible = false
 		line_2d.visible = false
+		
+		if ray_cast_2d.get_collider().get("IS_BOSS"):
+			ray_cast_2d.get_collider().takeDamage(damage)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "remove":

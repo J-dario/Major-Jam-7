@@ -13,6 +13,9 @@ func _physics_process(delta: float)-> void:
 	if ray_cast_2d.is_colliding() and hasCollided == false:
 		hasCollided = true
 		bullet_sprite.visible = false
+		
+		if ray_cast_2d.get_collider().get("IS_PLAYER"):
+			ray_cast_2d.get_collider().takeDamage()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "remove":

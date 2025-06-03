@@ -9,12 +9,15 @@ const bulletScene = preload("res://scenes/bullet.tscn")
 @onready var shoot_timer: Timer = $shootTimer
 
 var timeBetweenShots: float = 0.5
-var canShoot: bool = true
+var canShoot: bool = false
 
 func _ready() -> void:
 	shoot_timer.wait_time = timeBetweenShots
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("Test3"):
+		canShoot = true
+	
 	var player = get_parent().player
 	var playerPos = player.global_position - global_position + Vector2(0,75)
 	if playerPos < Vector2.ZERO:

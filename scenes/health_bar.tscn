@@ -1,18 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3ki304dj4sh1"]
+[gd_scene load_steps=7 format=3 uid="uid://c3ki304dj4sh1"]
 
 [ext_resource type="Script" uid="uid://d4kpbqv0rut75" path="res://scripts/health_bar.gd" id="1_1bvlm"]
+[ext_resource type="FontFile" uid="uid://mrqi0t7ikihl" path="res://fonts/upheavtt.ttf" id="2_y3kqx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwqyq"]
 draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 50
+border_width_top = 50
+border_width_right = 50
+border_width_bottom = 50
 border_color = Color(1, 1, 1, 1)
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
+expand_margin_left = 50.0
+expand_margin_top = 50.0
+expand_margin_right = 50.0
+expand_margin_bottom = 50.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvlm"]
 bg_color = Color(0.647059, 0.188235, 0.188235, 1)
@@ -23,10 +24,10 @@ bg_color = Color(0.647059, 0.188235, 0.188235, 1)
 bg_color = Color(1, 1, 1, 1)
 
 [node name="HealthBar" type="ProgressBar"]
-offset_left = -8.0
-offset_top = 11.0
-offset_right = 72.0
-offset_bottom = 21.0
+offset_left = -740.0
+offset_top = 18.0
+offset_right = 6665.0
+offset_bottom = 178.0
 scale = Vector2(0.2, 0.2)
 theme_override_styles/background = SubResource("StyleBoxFlat_iwqyq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1bvlm")
@@ -34,7 +35,7 @@ step = 0.001
 show_percentage = false
 script = ExtResource("1_1bvlm")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="insideBar" type="ProgressBar" parent="."]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -45,3 +46,17 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_y3kqx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
 show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1430.0
+offset_top = -15.0
+offset_right = 5975.0
+offset_bottom = 133.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_y3kqx")
+theme_override_font_sizes/font_size = 140
+text = "Rudenthall The Wicked - King of the Dark Castle"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true

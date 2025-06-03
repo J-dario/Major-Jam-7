@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var cpu_particles_2d_3: CPUParticles2D = $CPUParticles2D3
 @onready var audio_stream_player_2d_2: AudioStreamPlayer2D = $AudioStreamPlayer2D2
 @onready var audio_stream_player_2d_3: AudioStreamPlayer2D = $AudioStreamPlayer2D3
+@onready var player_health_bar: PlayerHealthBar = $"../CanvasLayer/PlayerHealthBar"
 
 const MOVEMENT_SPEED: float = 500.0
 const DODGE_SPEED: float = 800.0
@@ -18,6 +19,9 @@ var footStepsPlaying = false
 var dodgeRollDir: Vector2 = Vector2.ZERO
 var dodgeRollTimer: float = 0.0
 var isInvincible: bool = false
+
+func takeDamage():
+	player_health_bar.takeDMG()
 
 func _physics_process(delta: float) -> void:
 	if (get_global_mouse_position() - global_position) < Vector2.ZERO:
