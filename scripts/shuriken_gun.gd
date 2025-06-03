@@ -5,6 +5,7 @@ const bulletScene = preload("res://scenes/shurikenBullet.tscn")
 @onready var rotationOffset: Node2D = $RotationOffset
 @onready var shadow: Sprite2D = $RotationOffset/Sprite2D/Shadow
 @onready var shootPos: Marker2D = $RotationOffset/Sprite2D/shootPos
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var timeBetweenShots: float = 0.25
 var canShoot: bool = true
@@ -22,6 +23,7 @@ func _physics_process(delta: float) -> void:
 		$shootTimer.start()
 
 func _shoot():
+	audio_stream_player_2d.play()
 	var newBullet = bulletScene.instantiate()
 	get_tree().root.add_child(newBullet)
 	newBullet.global_position = shootPos.global_position
