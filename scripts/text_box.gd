@@ -32,7 +32,8 @@ func display_text(text_to_dispaly: String, speech_sfx: AudioStream):
 	custom_minimum_size.x = min(size.x, MAX_WIDTH)
 	
 	if size.x > MAX_WIDTH:
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		await resized
 		await resized
 		custom_minimum_size.y = size.y
 
