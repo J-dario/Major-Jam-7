@@ -5,39 +5,37 @@ class_name PlayerHealthBar
 @onready var hearts_2: Sprite2D = $Hearts2
 const HEARTS = preload("res://sprites/hearts.png")
 
-var currentHealth = 2
-var maxHealth = 2
 var heartContainers = []
 var heartSpawn = 315
 
 func _ready() -> void:
 	heartContainers.append(hearts)
 	heartContainers.append(hearts_2)
-	
+	GameManager.playerHealthBar = self
+
 func heal():
-	if currentHealth == maxHealth:
+	if GameManager.currentHealth == GameManager.maxHealth:
 		return
 	
-	heartContainers[currentHealth].region_rect.position.x -= 108
-	currentHealth += 1
-	print("CURRENT HEALRH IS: ", currentHealth)
+	heartContainers[GameManager.currentHealth].region_rect.position.x -= 108
+	GameManager.currentHealth += 1
 
 func takeDMG():
-	if currentHealth == 0:
-		return
+	if GameManager.currentHealth > 0:
+		GameManager.currentHealth -= 1
+		heartContainers[GameManager.currentHealth].region_rect.position.x += 108
 
-	currentHealth -= 1
-	heartContainers[currentHealth].region_rect.position.x += 108
-	print("CURRENT HEALRH IS: ", currentHealth)
+func fullHeal():
+	for i in range(GameManager.maxHealth):
+			heal()
 	
-	if currentHealth == 0:
-		print("DED")
-
 func healthUP():
-	maxHealth += 1
-	currentHealth += 1
 	
-	print ("RUN")
+	if GameManager.currentHealth != GameManager.maxHealth:
+		fullHeal()
+
+	GameManager.maxHealth += 1
+	GameManager.currentHealth += 1
 	
 	var newHeart = Sprite2D.new()
 	newHeart.texture = HEARTS

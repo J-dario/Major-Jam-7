@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://cg2loylcqgvvh"]
+
+[ext_resource type="Script" uid="uid://bs1qn8j7h1yso" path="res://scenes/dead_screen.gd" id="1_5pyt7"]
+[ext_resource type="FontFile" uid="uid://mrqi0t7ikihl" path="res://fonts/upheavtt.ttf" id="1_v8b16"]
+[ext_resource type="Texture2D" uid="uid://bpiqylwq16kjw" path="res://sprites/dialogueBox.png" id="2_5pyt7"]
+[ext_resource type="Texture2D" uid="uid://do3p3f223nlfa" path="res://sprites/kingP1Portrait.png" id="3_qaisq"]
+[ext_resource type="Texture2D" uid="uid://dhomkr5dgg8qg" path="res://sprites/Player-Sheet.png" id="4_mws2h"]
+[ext_resource type="PackedScene" uid="uid://dw0ibicklg1pj" path="res://scenes/card.tscn" id="5_3bdp4"]
+[ext_resource type="Shader" uid="uid://dhslrtrd82nds" path="res://shaders/vignette.gdshader" id="6_33e7q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5se58"]
+shader = ExtResource("6_33e7q")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[node name="DeadScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5pyt7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 999.0
+offset_top = 41.0
+offset_right = 1720.0
+offset_bottom = 184.0
+theme_override_fonts/font = ExtResource("1_v8b16")
+theme_override_font_sizes/font_size = 60
+text = "hehehehe i got 
+you! I win!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BossBox" type="Sprite2D" parent="Label"]
+show_behind_parent = true
+position = Vector2(440, 74)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("2_5pyt7")
+
+[node name="KingP1Portrait" type="Sprite2D" parent="Label"]
+position = Vector2(810, 74)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("3_qaisq")
+
+[node name="Player Box" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(482, 245)
+texture = ExtResource("2_5pyt7")
+
+[node name="Label" type="Label" parent="Player Box"]
+offset_left = -279.0
+offset_top = -75.0
+offset_right = 439.0
+offset_bottom = 68.0
+theme_override_fonts/font = ExtResource("1_v8b16")
+theme_override_font_sizes/font_size = 60
+text = "Nuh uh!! and and my guy can actually..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Player Box"]
+position = Vector2(-371, -3.00003)
+scale = Vector2(3, 3)
+texture = ExtResource("4_mws2h")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_5se58")
+layout_mode = 0
+offset_right = 1923.0
+offset_bottom = 1083.0
+color = Color(0, 0, 0, 1)
+
+[node name="Card1" parent="." instance=ExtResource("5_3bdp4")]
+position = Vector2(410, 697)
+scale = Vector2(2, 2)
+
+[node name="Card2" parent="." instance=ExtResource("5_3bdp4")]
+position = Vector2(997, 697)
+scale = Vector2(2, 2)
+
+[node name="Card3" parent="." instance=ExtResource("5_3bdp4")]
+position = Vector2(1579, 697)
+scale = Vector2(2, 2)

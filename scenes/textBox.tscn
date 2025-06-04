@@ -76,7 +76,7 @@ visible = false
 position = Vector2(3, -4)
 sprite_frames = SubResource("SpriteFrames_fejfi")
 autoplay = "default"
-frame_progress = 0.736499
+frame_progress = 0.0037775
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

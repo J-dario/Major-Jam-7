@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://3mcmvgfcak6u"]
+[gd_scene load_steps=15 format=3 uid="uid://3mcmvgfcak6u"]
 
 [ext_resource type="PackedScene" uid="uid://hpahw4ei3nqg" path="res://scenes/player.tscn" id="2_cmw7p"]
 [ext_resource type="Script" uid="uid://bo4b24eenf1hp" path="res://scripts/playerCamETG.gd" id="3_1tan0"]
+[ext_resource type="Shader" uid="uid://clxrynkgso5of" path="res://shaders/hitflash.gdshader" id="3_d8cix"]
 [ext_resource type="Texture2D" uid="uid://cchoimd72g3jh" path="res://sprites/TileSet.png" id="3_nhljj"]
 [ext_resource type="PackedScene" uid="uid://veohmyh2vp34" path="res://scenes/king.tscn" id="4_qsd7d"]
 [ext_resource type="PackedScene" uid="uid://c3ki304dj4sh1" path="res://scenes/health_bar.tscn" id="4_y6ttt"]
 [ext_resource type="PackedScene" uid="uid://chkoyvpy2l6fw" path="res://scenes/player_health_bar.tscn" id="5_qsd7d"]
+[ext_resource type="Script" uid="uid://nntxebj8cs2k" path="res://scripts/canvas_layer.gd" id="6_pivms"]
 [ext_resource type="Shader" uid="uid://dhslrtrd82nds" path="res://shaders/vignette.gdshader" id="7_lnovr"]
+[ext_resource type="Script" uid="uid://bpiyugiu723y7" path="res://singletons/GameManager.gd" id="9_1mfsc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y6ttt"]
 texture = ExtResource("3_nhljj")
@@ -208,6 +211,12 @@ tile_size = Vector2i(48, 48)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_y6ttt")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pivms"]
+resource_local_to_scene = true
+shader = ExtResource("3_d8cix")
+shader_parameter/hit_flash_color = Color(1, 1, 1, 1)
+shader_parameter/hit_flash_on = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jw310"]
 shader = ExtResource("7_lnovr")
 shader_parameter/vignette_intensity = 0.4
@@ -228,13 +237,19 @@ layer_1/tile_data = PackedInt32Array(262148, 327682, 7, 262149, 327682, 7, 32768
 [node name="player" parent="." instance=ExtResource("2_cmw7p")]
 position = Vector2(548, 296)
 
+[node name="AnimatedSprite2D" parent="player" index="0"]
+material = SubResource("ShaderMaterial_pivms")
+
 [node name="Camera2D" type="Camera2D" parent="player"]
 script = ExtResource("3_1tan0")
 
 [node name="King" parent="." instance=ExtResource("4_qsd7d")]
+unique_name_in_owner = true
 position = Vector2(581, -293)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("6_pivms")
 
 [node name="PlayerHealthBar" parent="CanvasLayer" instance=ExtResource("5_qsd7d")]
 
@@ -250,3 +265,8 @@ material = SubResource("ShaderMaterial_jw310")
 offset_right = 1923.0
 offset_bottom = 1083.0
 color = Color(0, 0, 0, 1)
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("9_1mfsc")
+
+[editable path="player"]

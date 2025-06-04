@@ -14,12 +14,6 @@ extends CharacterBody2D
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
 @onready var PICKUP_COIN__3_ = preload("res://sounds/pickupCoin (3).wav")
 
-const lines: Array[String] = [
-	"AAAAAAAAAAAAAAAAAAAA",
-	"Goobus",
-	"Vrrobis"
-]
-const MOVEMENT_SPEED: float = 500.0
 const DODGE_SPEED: float = 800.0
 const DODGE_DURATION: float = 0.3
 const IS_PLAYER: bool = true
@@ -28,10 +22,6 @@ var footStepsPlaying = false
 var dodgeRollDir: Vector2 = Vector2.ZERO
 var dodgeRollTimer: float = 0.0
 var isInvincible: bool = false
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Test"):
-		DialogManager.start_dialog(global_position, lines, PICKUP_COIN__3_)
 
 func freeze_frame(timescale: float, duration: float) -> void:
 	Engine.time_scale = timescale
@@ -49,8 +39,6 @@ func takeDamage():
 		freeze_frame(0.2, 0.3)
 
 func _physics_process(delta: float) -> void:
-	
-	
 	if (get_global_mouse_position() - global_position) < Vector2.ZERO:
 		animated_sprite_2d.flip_h = true
 		shuriken.position.x = -25
@@ -88,7 +76,7 @@ func _movement(delta: float) -> void:
 	).normalized()
 	
 	# chane 22 to increase/decrease acceleration
-	velocity = lerp(velocity, input_vector * MOVEMENT_SPEED, 22.0 * delta)
+	velocity = lerp(velocity, input_vector * GameManager.movementSpeed, 22.0 * delta)
 	
 	if Input.is_action_just_pressed("dodge"):
 		if input_vector != Vector2.ZERO:
@@ -120,3 +108,8 @@ func _dodgeLogic(delta: float) -> void:
 
 func _on_audio_stream_player_2d_finished() -> void:
 	footStepsPlaying = false
+
+
+func _on_audio_stream_player_2d_4_finished() -> void:
+	if GameManager.currentHealth == 0:
+			GameManager.playerDed()

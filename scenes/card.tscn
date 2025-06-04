@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw0ibicklg1pj"]
+
+[ext_resource type="Script" uid="uid://dd6bv4dhuf401" path="res://scripts/card.gd" id="1_kg30u"]
+[ext_resource type="Texture2D" uid="uid://c82n7qx6gcx1f" path="res://sprites/cards.png" id="1_ktuci"]
+[ext_resource type="Texture2D" uid="uid://w7b0cx4o08eu" path="res://sprites/badges.png" id="2_kg30u"]
+[ext_resource type="FontFile" uid="uid://mrqi0t7ikihl" path="res://fonts/upheavtt.ttf" id="3_sy11y"]
+
+[node name="Node2D" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_kg30u")
+
+[node name="Card" type="Sprite2D" parent="."]
+texture = ExtResource("1_ktuci")
+
+[node name="Badge" type="Sprite2D" parent="."]
+position = Vector2(0, -80)
+texture = ExtResource("2_kg30u")
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 100)
+
+[node name="Title" type="Label" parent="."]
+offset_left = -110.0
+offset_top = 10.0
+offset_right = 110.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_sy11y")
+theme_override_font_sizes/font_size = 20
+text = "HAVE MORE HEALTH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+offset_left = -120.0
+offset_top = -160.0
+offset_right = 120.0
+offset_bottom = 160.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -5,12 +5,13 @@ const bulletScene = preload("res://scenes/shurikenBullet.tscn")
 @onready var rotationOffset: Node2D = $RotationOffset
 @onready var shootPos: Marker2D = $RotationOffset/Sprite2D/shootPos
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var shoot_timer: Timer = $shootTimer
 
-var timeBetweenShots: float = 0.25
 var canShoot: bool = true
 
 func _ready() -> void:
-	$shootTimer.wait_time = timeBetweenShots
+	changeAS(GameManager.timeBetweenShots)
+	GameManager.shurikenGun = self
 
 func _physics_process(delta: float) -> void:
 	rotationOffset.rotation = lerp_angle(rotationOffset.rotation, (get_global_mouse_position() - global_position).angle(), 6.5*delta)
@@ -32,3 +33,6 @@ func _shoot():
 
 func _on_shoot_timer_timeout() -> void:
 	canShoot = true
+
+func changeAS(time: float):
+	shoot_timer.wait_time = time

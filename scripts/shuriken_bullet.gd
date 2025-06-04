@@ -8,10 +8,8 @@ extends Node2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var camera_2d: Camera2D = $/root/Node2D/player/Camera2D
 
-
 var speed: float = 800.0
 var hasCollided = false
-var damage = 1
 
 func _physics_process(delta: float)-> void:
 	global_position += Vector2(1, 0).rotated(rotation) * speed * delta
@@ -26,10 +24,8 @@ func _physics_process(delta: float)-> void:
 		camera_2d.screen_shake(4, 0.1)
 		
 		if ray_cast_2d.get_collider().get("IS_BOSS"):
-			ray_cast_2d.get_collider().takeDamage(damage)
+			ray_cast_2d.get_collider().takeDamage(GameManager.playerDamage)
 			camera_2d.screen_shake(8, 0.3)
-
-
 
 func _on_cpu_particles_2d_finished() -> void:
 	queue_free()
