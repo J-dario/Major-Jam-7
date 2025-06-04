@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://4waay5jugkd" path="res://sprites/staff.png" id="1_0mpdh"]
 [ext_resource type="Script" uid="uid://dxq5djjbixpa4" path="res://scripts/staff.gd" id="1_3gxsk"]
-[ext_resource type="AudioStream" uid="uid://itl2qrhss0t1" path="res://sounds/mixkit-magic-bubbles-spell-2999.wav" id="3_ov8dy"]
+[ext_resource type="AudioStream" uid="uid://iya10hrcfgmn" path="res://sounds/hitHurt (2).wav" id="3_ov8dy"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xh1k6"]
 random_pitch = 1.2

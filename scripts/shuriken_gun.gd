@@ -15,6 +15,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	rotationOffset.rotation = lerp_angle(rotationOffset.rotation, (get_global_mouse_position() - global_position).angle(), 6.5*delta)
 
+	if DialogManager.is_active == true:
+		return
+		
 	if Input.is_action_just_pressed("shoot") and canShoot:
 		_shoot()
 		canShoot = false

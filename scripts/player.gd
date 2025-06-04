@@ -9,7 +9,16 @@ extends CharacterBody2D
 @onready var audio_stream_player_2d_2: AudioStreamPlayer2D = $AudioStreamPlayer2D2
 @onready var audio_stream_player_2d_3: AudioStreamPlayer2D = $AudioStreamPlayer2D3
 @onready var player_health_bar: PlayerHealthBar = $"../CanvasLayer/PlayerHealthBar"
+@onready var camera_2d: Camera2D = $Camera2D
+@onready var audio_stream_player_2d_4: AudioStreamPlayer2D = $AudioStreamPlayer2D4
+@onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
+@onready var PICKUP_COIN__3_ = preload("res://sounds/pickupCoin (3).wav")
 
+const lines: Array[String] = [
+	"AAAAAAAAAAAAAAAAAAAA",
+	"Goobus",
+	"Vrrobis"
+]
 const MOVEMENT_SPEED: float = 500.0
 const DODGE_SPEED: float = 800.0
 const DODGE_DURATION: float = 0.3
@@ -20,10 +29,28 @@ var dodgeRollDir: Vector2 = Vector2.ZERO
 var dodgeRollTimer: float = 0.0
 var isInvincible: bool = false
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Test"):
+		DialogManager.start_dialog(global_position, lines, PICKUP_COIN__3_)
+
+func freeze_frame(timescale: float, duration: float) -> void:
+	Engine.time_scale = timescale
+	color_rect.visible = true
+	await get_tree().create_timer(duration, true, false, true).timeout
+	Engine.time_scale = 1.0
+	color_rect.visible = false
+	
 func takeDamage():
-	player_health_bar.takeDMG()
+	if !isInvincible:
+		player_health_bar.takeDMG()
+		$AnimationPlayer.play("hit")
+		camera_2d.screen_shake(15, 0.8)
+		audio_stream_player_2d_4.play()
+		freeze_frame(0.2, 0.3)
 
 func _physics_process(delta: float) -> void:
+	
+	
 	if (get_global_mouse_position() - global_position) < Vector2.ZERO:
 		animated_sprite_2d.flip_h = true
 		shuriken.position.x = -25
@@ -31,6 +58,9 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = false
 		shuriken.position.x = 25
 	
+	if DialogManager.is_active == true:
+		return
+		
 	var input_vector = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"), 
 		Input.get_action_strength("down") - Input.get_action_strength("up")

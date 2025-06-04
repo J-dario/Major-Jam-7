@@ -6,8 +6,8 @@ extends Node2D
 @onready var line_2d: Line2D = $Line2D
 @onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var camera_2d: Camera2D = $/root/Node2D/player/Camera2D
 
-const boomScene = preload("res://scenes/shuriken_boom.tscn")
 
 var speed: float = 800.0
 var hasCollided = false
@@ -23,16 +23,22 @@ func _physics_process(delta: float)-> void:
 		audio_stream_player_2d.play()
 		sprite.visible = false
 		line_2d.visible = false
+		camera_2d.screen_shake(4, 0.1)
 		
 		if ray_cast_2d.get_collider().get("IS_BOSS"):
 			ray_cast_2d.get_collider().takeDamage(damage)
+			camera_2d.screen_shake(8, 0.3)
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "remove":
-		queue_free()
+
+
+func _on_cpu_particles_2d_finished() -> void:
+	queue_free()
+
 
 func _on_distance_timeout_timeout() -> void:
 	animation_player.play("remove")
 
-func _on_cpu_particles_2d_finished() -> void:
-	queue_free()
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "remove":
+		queue_free()

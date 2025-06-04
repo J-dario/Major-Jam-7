@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://vtgy43d3rns6"]
 
 [ext_resource type="Texture2D" uid="uid://cj0om01w5fbsa" path="res://sprites/bullet.png" id="1_mkf8s"]
-[ext_resource type="Script" uid="uid://daitxqh70q62p" path="res://scenes/bullet.gd" id="1_y25gk"]
+[ext_resource type="Script" uid="uid://daitxqh70q62p" path="res://scripts/bullet.gd" id="1_y25gk"]
 
 [sub_resource type="Animation" id="Animation_l5glv"]
 length = 0.001
@@ -76,9 +76,9 @@ libraries = {
 }
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-3, 0)
-scale = Vector2(3, 3)
-target_position = Vector2(8, 0)
+position = Vector2(-10, 0)
+scale = Vector2(20, 20)
+target_position = Vector2(1.45, 0)
 
 [node name="DistanceTimeout" type="Timer" parent="."]
 wait_time = 3.0
