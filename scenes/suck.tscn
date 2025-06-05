@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ch21fqi4fvid4"]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+amount = 50
+emission_shape = 1
+emission_sphere_radius = 128.0
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+radial_accel_min = -200.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0

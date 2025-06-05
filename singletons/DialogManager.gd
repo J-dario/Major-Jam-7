@@ -3,6 +3,7 @@ extends Node
 
 @onready var text_box_scene = preload("res://scenes/textBox.tscn")
 
+signal done
 
 var dialog_lines: Array[String] = []
 var current_line_index = 0
@@ -16,6 +17,7 @@ var can_advance_line = false
 var sfx: AudioStream
 
 func start_dialog(position: Vector2, lines: Array[String], speech_sfx: AudioStream):
+	print("STARING")
 	if is_active:
 		return
 	
@@ -26,8 +28,6 @@ func start_dialog(position: Vector2, lines: Array[String], speech_sfx: AudioStre
 	
 	_show_text_box()
 	is_active = true
-
-
 
 func _show_text_box():
 	text_box = text_box_scene.instantiate()
@@ -50,6 +50,8 @@ func _unhandled_input(event):
 		if current_line_index >= dialog_lines.size():
 			is_active = false
 			current_line_index = 0
+			print("emitting signal...")
+			DialogManager.emit_signal("done")
 			return
 			
 		_show_text_box()
