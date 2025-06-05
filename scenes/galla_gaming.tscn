@@ -1,0 +1,233 @@
+[gd_scene load_steps=14 format=3 uid="uid://1jhy53afekye"]
+
+[ext_resource type="Script" uid="uid://cn1nixeoj7ylc" path="res://scenes/galla_gaming.gd" id="1_paavp"]
+[ext_resource type="PackedScene" uid="uid://dd703oy3crluo" path="res://scenes/space.tscn" id="1_ub1mr"]
+[ext_resource type="PackedScene" uid="uid://bjukq8ucfn3yj" path="res://scenes/space_player.tscn" id="2_ao3js"]
+[ext_resource type="Shader" uid="uid://dhslrtrd82nds" path="res://shaders/vignette.gdshader" id="3_ckjdk"]
+[ext_resource type="PackedScene" uid="uid://bes0bn2uen0m3" path="res://scenes/boss.tscn" id="4_ckjdk"]
+[ext_resource type="PackedScene" uid="uid://c3ki304dj4sh1" path="res://scenes/health_bar.tscn" id="5_ss8nd"]
+[ext_resource type="PackedScene" uid="uid://chkoyvpy2l6fw" path="res://scenes/player_health_bar.tscn" id="6_8jv68"]
+[ext_resource type="AudioStream" uid="uid://lwcy6cicf41o" path="res://sounds/cosmic-starfighter-314414 (1).mp3" id="6_nrh3m"]
+
+[sub_resource type="Animation" id="Animation_yiy85"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeIn:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../spacePlayer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-240, 557)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Boss:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2411, 499)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealthBar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerHealthBar:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ub1mr"]
+resource_name = "fadeIn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeIn:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeIn")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../spacePlayer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 4.28709),
+"update": 0,
+"values": [Vector2(-240, 557), Vector2(321, 557)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Boss:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2, 3),
+"transitions": PackedFloat32Array(1, 5.09825),
+"update": 0,
+"values": [Vector2(2411, 499), Vector2(1609, 499)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"begin"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_amh6y"]
+resource_name = "spawnHealthBars"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerHealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ao3js"]
+_data = {
+&"RESET": SubResource("Animation_yiy85"),
+&"fadeIn": SubResource("Animation_ub1mr"),
+&"spawnHealthBars": SubResource("Animation_amh6y")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_paavp"]
+shader = ExtResource("3_ckjdk")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[node name="GallaGaming" type="Node2D"]
+script = ExtResource("1_paavp")
+
+[node name="Space" parent="." instance=ExtResource("1_ub1mr")]
+
+[node name="spacePlayer" parent="." instance=ExtResource("2_ao3js")]
+position = Vector2(-240, 557)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_ao3js")
+}
+autoplay = "fadeIn"
+
+[node name="FadeIn" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_left = -61.0
+offset_top = -57.0
+offset_right = 2044.0
+offset_bottom = 1177.0
+
+[node name="Vignette" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_paavp")
+offset_right = 1923.0
+offset_bottom = 1083.0
+color = Color(0, 0, 0, 1)
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("5_ss8nd")]
+modulate = Color(1, 1, 1, 0)
+offset_left = 196.0
+offset_top = 967.0
+offset_right = 7601.0
+offset_bottom = 1127.0
+
+[node name="Label" parent="CanvasLayer/HealthBar" index="1"]
+text = "Rudenthall  The Pure - Plauge Incarnate"
+
+[node name="PlayerHealthBar" parent="CanvasLayer" instance=ExtResource("6_8jv68")]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Boss" parent="." instance=ExtResource("4_ckjdk")]
+position = Vector2(2411, 499)
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_nrh3m")
+volume_db = -8.301
+
+[editable path="CanvasLayer/HealthBar"]

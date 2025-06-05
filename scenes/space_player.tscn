@@ -1,0 +1,121 @@
+[gd_scene load_steps=16 format=3 uid="uid://bjukq8ucfn3yj"]
+
+[ext_resource type="Script" uid="uid://exnl7rk88j7q" path="res://spacePlayer.gd" id="1_q1du6"]
+[ext_resource type="Texture2D" uid="uid://b30xv234oc766" path="res://sprites/ufo.png" id="2_ngarl"]
+[ext_resource type="Texture2D" uid="uid://drha36jrow46o" path="res://sprites/screenWipe.png" id="2_opy1n"]
+[ext_resource type="Shader" uid="uid://clxrynkgso5of" path="res://shaders/hitflash.gdshader" id="3_umfja"]
+[ext_resource type="AudioStream" uid="uid://mi6p0etjhdly" path="res://sounds/laserShoot.wav" id="4_opy1n"]
+[ext_resource type="AudioStream" uid="uid://b3ra0ec2o8xj6" path="res://sounds/explosion (4).wav" id="6_hwf6r"]
+
+[sub_resource type="Curve" id="Curve_opy1n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.67219), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_umfja"]
+offsets = PackedFloat32Array(0.0121457, 0.145749, 0.161943, 0.165992, 0.364372, 0.384615, 0.639676, 0.651822, 0.862348, 0.882591, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.157393, 0.045787, 0.045787, 1, 0.647059, 0.188235, 0.188235, 1, 0.647059, 0.188235, 0.188235, 1, 0.647059, 0.188235, 0.188235, 1, 0.745098, 0.466667, 0.168627, 1, 0.745098, 0.466667, 0.168627, 1, 0.909804, 0.756863, 0.439216, 1, 0.964535, 0.9044, 0.779503, 1, 0.987644, 0.966694, 0.92318, 1, 1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwf6r"]
+resource_local_to_scene = true
+shader = ExtResource("3_umfja")
+shader_parameter/hit_flash_color = Color(1, 1, 1, 1)
+shader_parameter/hit_flash_on = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q1du6"]
+radius = 53.8461
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ngarl"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("4_opy1n")
+
+[sub_resource type="Animation" id="Animation_umfja"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/hit_flash_on")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_hwf6r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/hit_flash_on")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osv2l"]
+_data = {
+&"RESET": SubResource("Animation_hwf6r"),
+&"hit": SubResource("Animation_umfja")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_osv2l"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("6_hwf6r")
+
+[node name="spacePlayer" type="CharacterBody2D"]
+script = ExtResource("1_q1du6")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 28)
+amount = 16
+texture = ExtResource("2_opy1n")
+lifetime = 0.6
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 23.64
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_opy1n")
+color_ramp = SubResource("Gradient_umfja")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hwf6r")
+texture = ExtResource("2_ngarl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(0.520001, 0.520001)
+shape = SubResource("CircleShape2D_q1du6")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(60, 0)
+
+[node name="shootTimer" type="Timer" parent="."]
+
+[node name="Laser" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ngarl")
+volume_db = -10.707
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_osv2l")
+}
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_osv2l")
+
+[node name="iFrames" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="finished" from="hurt" to="." method="_on_hurt_finished"]
+[connection signal="timeout" from="iFrames" to="." method="_on_i_frames_timeout"]

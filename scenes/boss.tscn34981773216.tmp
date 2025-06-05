@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bes0bn2uen0m3"]
+
+[ext_resource type="Texture2D" uid="uid://drha36jrow46o" path="res://sprites/screenWipe.png" id="1_dlmty"]
+[ext_resource type="Script" uid="uid://cjdger0w7k3tr" path="res://scenes/boss.gd" id="1_neq0i"]
+[ext_resource type="AudioStream" uid="uid://6tsacgg4xiq5" path="res://sounds/explosion (3).wav" id="3_jncid"]
+
+[sub_resource type="Gradient" id="Gradient_dlmty"]
+offsets = PackedFloat32Array(0, 0.133603, 0.145749, 0.352227, 0.368421, 0.578947, 0.595142, 0.805668, 0.821862, 1)
+colors = PackedColorArray(0.0627451, 0.0784314, 0.121569, 1, 0.0627451, 0.0784314, 0.121569, 1, 0.0627451, 0.0784314, 0.121569, 1, 0.0823529, 0.113725, 0.156863, 1, 0.0891386, 0.124212, 0.166116, 1, 0.12549, 0.180392, 0.215686, 1, 0.138278, 0.194714, 0.228474, 1, 0.223529, 0.290196, 0.313726, 1, 0.352941, 0.408497, 0.428105, 1, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlmty"]
+radius = 87.0517
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qnbj4"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("3_jncid")
+
+[node name="Boss" type="Node2D"]
+script = ExtResource("1_neq0i")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(2.04, 2.04)
+amount = 50
+texture = ExtResource("1_dlmty")
+lifetime = 1.54
+lifetime_randomness = 0.05
+emission_shape = 1
+emission_sphere_radius = 128.0
+gravity = Vector2(0, -980)
+scale_amount_max = 4.0
+color_ramp = SubResource("Gradient_dlmty")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-12, 4.76837e-07)
+scale = Vector2(3.52, 3.52)
+texture = ExtResource("1_dlmty")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-6.53409, 2.84091)
+scale = Vector2(0.545454, 0.545454)
+texture = ExtResource("1_dlmty")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-10, 0)
+shape = SubResource("CircleShape2D_dlmty")
+
+[node name="hurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_qnbj4")
+volume_db = -15.0

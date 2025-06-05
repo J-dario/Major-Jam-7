@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://hpahw4ei3nqg"]
+[gd_scene load_steps=28 format=3 uid="uid://hpahw4ei3nqg"]
 
 [ext_resource type="Texture2D" uid="uid://dhomkr5dgg8qg" path="res://sprites/Player-Sheet.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dsnh1ij1560tu" path="res://scripts/player.gd" id="1_g2els"]
@@ -133,12 +133,35 @@ tracks/0/keys = {
 "values": [0.0, 6.28319]
 }
 
+[sub_resource type="Animation" id="Animation_smehm"]
+resource_name = "rsahder"
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_ur7pv"]
+resource_name = "rshaerr"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/hit_flash_on")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
 _data = {
 &"RESET": SubResource("Animation_qhqgy"),
 &"hit": SubResource("Animation_y4r1p"),
 &"rollLeft": SubResource("Animation_dqkch"),
-&"rollRight": SubResource("Animation_g2els")
+&"rollRight": SubResource("Animation_g2els"),
+&"rsahder": SubResource("Animation_smehm"),
+&"rshaerr": SubResource("Animation_ur7pv")
 }
 
 [sub_resource type="Curve" id="Curve_dqkch"]
@@ -251,6 +274,11 @@ volume_db = -10.0
 [node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_smehm")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
 [connection signal="finished" from="AudioStreamPlayer2D4" to="." method="_on_audio_stream_player_2d_4_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

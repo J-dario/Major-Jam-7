@@ -12,6 +12,8 @@ func _ready() -> void:
 	heartContainers.append(hearts)
 	heartContainers.append(hearts_2)
 	GameManager.playerHealthBar = self
+	for i in range(2, GameManager.maxHealth):
+		healthUP()
 
 func heal():
 	if GameManager.currentHealth == GameManager.maxHealth:

@@ -70,6 +70,7 @@ func _display_letter():
 			if text[letter_index] in ["a", "e", "i", "o", "u"]:
 				new_audio_player.pitch_scale += 0.2
 			get_tree().root.add_child(new_audio_player)
+			new_audio_player.volume_db -= 11
 			new_audio_player.play()
 			await new_audio_player.finished
 			new_audio_player.queue_free()

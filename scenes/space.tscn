@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://dd703oy3crluo"]
+
+[ext_resource type="Script" uid="uid://dmv4jo46a4jod" path="res://scripts/space.gd" id="1_1gvwg"]
+[ext_resource type="Texture2D" uid="uid://bye516g6pcs3j" path="res://sprites/space1.png" id="1_dtwn4"]
+[ext_resource type="Texture2D" uid="uid://w86pnpm8x88k" path="res://sprites/space2.png" id="2_x2olr"]
+[ext_resource type="Texture2D" uid="uid://bwjshgqf8oeft" path="res://sprites/space3.png" id="3_1gvwg"]
+[ext_resource type="Texture2D" uid="uid://c8xxhhi7mq8vf" path="res://sprites/space4.png" id="4_n0118"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n0118"]
+distance = -27.0
+
+[node name="Space" type="Node2D"]
+script = ExtResource("1_1gvwg")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Bg1" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Bg1"]
+texture = ExtResource("1_dtwn4")
+centered = false
+
+[node name="bubs1" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(2302, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/bubs1"]
+texture = ExtResource("2_x2olr")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("4_n0118")
+centered = false
+
+[node name="sq" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/sq"]
+texture = ExtResource("3_1gvwg")
+centered = false
+
+[node name="LeftBorder" type="StaticBody2D" parent="."]
+position = Vector2(1, 0)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBorder"]
+position = Vector2(-1.18021e-06, -27)
+shape = SubResource("WorldBoundaryShape2D_n0118")
+
+[node name="topBorder" type="StaticBody2D" parent="."]
+position = Vector2(-4, 1)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="topBorder"]
+position = Vector2(4, -28)
+shape = SubResource("WorldBoundaryShape2D_n0118")
+
+[node name="bottomBorder" type="StaticBody2D" parent="."]
+position = Vector2(0, 1079)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottomBorder"]
+position = Vector2(49, -66)
+shape = SubResource("WorldBoundaryShape2D_n0118")
+
+[node name="rightBorder" type="StaticBody2D" parent="."]
+position = Vector2(1933, 1079)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rightBorder"]
+position = Vector2(8, -42)
+shape = SubResource("WorldBoundaryShape2D_n0118")

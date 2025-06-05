@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7i18qx8jut44"]
+
+[ext_resource type="PackedScene" uid="uid://vtgy43d3rns6" path="res://scenes/bullet.tscn" id="1_br02m"]
+[ext_resource type="Texture2D" uid="uid://bq6hqj5cngr1a" path="res://sprites/featherShot.png" id="2_esbhw"]
+
+[node name="FeatherBurst" type="Node2D"]
+
+[node name="Bullet" parent="." instance=ExtResource("1_br02m")]
+
+[node name="bulletSprite" parent="Bullet/BulletBody" index="0"]
+texture = ExtResource("2_esbhw")
+
+[node name="Bullet2" parent="." instance=ExtResource("1_br02m")]
+rotation = -0.152963
+
+[node name="bulletSprite" parent="Bullet2/BulletBody" index="0"]
+texture = ExtResource("2_esbhw")
+
+[node name="Bullet3" parent="." instance=ExtResource("1_br02m")]
+rotation = 0.159278
+
+[node name="bulletSprite" parent="Bullet3/BulletBody" index="0"]
+texture = ExtResource("2_esbhw")
+
+[node name="Bullet4" parent="." instance=ExtResource("1_br02m")]
+rotation = -0.449268
+
+[node name="bulletSprite" parent="Bullet4/BulletBody" index="0"]
+texture = ExtResource("2_esbhw")
+
+[node name="Bullet5" parent="." instance=ExtResource("1_br02m")]
+rotation = 0.403999
+
+[node name="bulletSprite" parent="Bullet5/BulletBody" index="0"]
+texture = ExtResource("2_esbhw")
+
+[editable path="Bullet"]
+[editable path="Bullet2"]
+[editable path="Bullet3"]
+[editable path="Bullet4"]
+[editable path="Bullet5"]

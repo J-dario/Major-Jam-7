@@ -40,11 +40,17 @@ volume_db = -10.0
 
 [node name="AttackDuration" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 autostart = true
+
+[node name="Timer" type="Timer" parent="AttackDuration"]
+wait_time = 2.0
+one_shot = true
 
 [node name="attackCD" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="AttackDuration" to="." method="_on_attack_duration_timeout"]
+[connection signal="timeout" from="AttackDuration/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="attackCD" to="." method="_on_attack_cd_timeout"]

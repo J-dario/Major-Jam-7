@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmbvg5a612yhr"]
+
+[ext_resource type="PackedScene" uid="uid://vtgy43d3rns6" path="res://scenes/bullet.tscn" id="1_mmw8s"]
+
+[node name="16" type="Node2D"]
+
+[node name="Bullet" parent="." instance=ExtResource("1_mmw8s")]
+
+[node name="Bullet2" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 0.392699
+
+[node name="Bullet3" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 0.785398
+
+[node name="Bullet4" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 1.1781
+
+[node name="Bullet5" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 1.5708
+
+[node name="Bullet6" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 1.9635
+
+[node name="Bullet7" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 2.35619
+
+[node name="Bullet8" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 2.92343
+
+[node name="Bullet9" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 3.14159
+
+[node name="Bullet10" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 3.53429
+
+[node name="Bullet11" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 3.92699
+
+[node name="Bullet12" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 4.31969
+
+[node name="Bullet13" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 4.71239
+
+[node name="Bullet14" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 5.10509
+
+[node name="Bullet15" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 5.49779
+
+[node name="Bullet16" parent="." instance=ExtResource("1_mmw8s")]
+rotation = 5.89049

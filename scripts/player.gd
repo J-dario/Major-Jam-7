@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var audio_stream_player_2d_4: AudioStreamPlayer2D = $AudioStreamPlayer2D4
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
+@onready var timer: Timer = $Timer
 
 const DODGE_SPEED: float = 800.0
 const DODGE_DURATION: float = 0.3
@@ -31,11 +32,13 @@ func freeze_frame(timescale: float, duration: float) -> void:
 	
 func takeDamage():
 	if !isInvincible:
+		isInvincible = true
 		player_health_bar.takeDMG()
 		$AnimationPlayer.play("hit")
 		camera_2d.screen_shake(15, 0.8)
 		audio_stream_player_2d_4.play()
 		freeze_frame(0.2, 0.3)
+		timer.start()
 
 func _physics_process(delta: float) -> void:
 	if (get_global_mouse_position() - global_position) < Vector2.ZERO:
@@ -104,6 +107,7 @@ func _dodgeLogic(delta: float) -> void:
 		audio_stream_player_2d_3.play()
 		dodgeRollDir = Vector2.ZERO
 		isInvincible = false
+		$AnimationPlayer.play("rshaerr")
 
 func _on_audio_stream_player_2d_finished() -> void:
 	footStepsPlaying = false
@@ -111,4 +115,8 @@ func _on_audio_stream_player_2d_finished() -> void:
 
 func _on_audio_stream_player_2d_4_finished() -> void:
 	if GameManager.currentHealth == 0:
-			GameManager.playerDed()
+		GameManager.playerDed()
+
+
+func _on_timer_timeout() -> void:
+	isInvincible = false

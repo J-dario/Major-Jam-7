@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://3mcmvgfcak6u"]
+[gd_scene load_steps=24 format=3 uid="uid://3mcmvgfcak6u"]
 
 [ext_resource type="Script" uid="uid://dqbkm2l5u7s6k" path="res://scenes/etg.gd" id="1_pivms"]
 [ext_resource type="PackedScene" uid="uid://hpahw4ei3nqg" path="res://scenes/player.tscn" id="2_cmw7p"]
@@ -281,6 +281,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerHealthBar:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HealthBar3:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_1mfsc"]
 resource_name = "fade_in"
@@ -378,11 +402,68 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_da8kk"]
+resource_name = "leaving"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerHealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%King/AnimatedSprite2D/AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"cutscene"],
+"method": &"play"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"moveScene"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j2cxr"]
 _data = {
 &"RESET": SubResource("Animation_pivms"),
 &"fade_in": SubResource("Animation_1mfsc"),
-&"intro": SubResource("Animation_j2cxr")
+&"intro": SubResource("Animation_j2cxr"),
+&"leaving": SubResource("Animation_da8kk")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2cxr"]
@@ -419,7 +500,7 @@ stream = ExtResource("12_j2cxr")
 unique_name_in_owner = true
 position = Vector2(581, -293)
 
-[node name="Sprite2D" parent="King" index="0"]
+[node name="AnimatedSprite2D" parent="King" index="0"]
 material = SubResource("ShaderMaterial_j2cxr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -13,6 +13,7 @@ var actrivated = false
 func _ready() -> void:
 	GameManager.connect("phaseChange", changePhase)
 	DialogManager.connect("done", makeDialog)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if actrivated == false:
@@ -33,11 +34,21 @@ func makeDialog():
 		DialogManager.start_dialog(king.global_position - global_position, ["No! No! No!", "This isn't over...", "My guy actually can fly so take that!"], PICKUP_COIN__2_)
 		camera_2d.reparent(king)
 		GameManager.bossPhase += 1
+	elif GameManager.bossPhase == 5:	
+		GameManager.playerCanMove = false
+		GameManager.enemyCanAttack = false
+		DialogManager.start_dialog(king.global_position - global_position, ["ENOUGH!", "I've grown tired of this", "My guy can actually houses the soul of a god!!!"], PICKUP_COIN__2_)
+		camera_2d.reparent(king)
+		GameManager.bossPhase += 1
 		
 	if DialogManager.is_active == false:
+		if GameManager.bossPhase == 6:		
+			animation_player.play("leaving")
+			return
 		GameManager.playerCanMove = true
 		GameManager.enemyCanAttack = true
 		camera_2d.reparent(player)
+		player.isInvincible = false
 		
 		if GameManager.bossPhase == 2:		
 			beginPhase2()
@@ -46,13 +57,13 @@ func makeDialog():
 
 func beginPhase3():
 	king.should_chase = true
-	# king.sprite_2d.region_rect.position.x = 90.0
+	king.sprite_2d.play("phase3Idle")
 	king.phase3()
 
 
 func beginPhase2():
 	king.should_chase = true
-	king.sprite_2d.region_rect.position.x = 90.0
+	king.sprite_2d.play("phase2")
 	king.phase2()
 
 func changePhase():
@@ -60,15 +71,30 @@ func changePhase():
 		endPhase1()
 	elif GameManager.bossPhase == 3:
 		endPhase2()
+	elif GameManager.bossPhase == 5:
+		endPhase3()
+
+func endPhase3():
+	GameManager.playerCanMove = false
+	GameManager.enemyCanAttack = false
+	king.should_chase = false
+	player.isInvincible = true
+	DialogManager.start_dialog(player.global_position - global_position, ["Okay are we done here?"], PICKUP_COIN__3_)
 
 
 func endPhase2():
 	GameManager.playerCanMove = false
 	GameManager.enemyCanAttack = false
 	king.should_chase = false
+	player.isInvincible = true
 	DialogManager.start_dialog(player.global_position - global_position, ["Woohoo! This time for real!"], PICKUP_COIN__3_)
 
 func endPhase1():
 	GameManager.playerCanMove = false
 	GameManager.enemyCanAttack = false
+	player.isInvincible = true
 	DialogManager.start_dialog(player.global_position - global_position, ["Yes! I beat you!"], PICKUP_COIN__3_)
+
+func moveScene():
+	GameManager.currentHealth = GameManager.maxHealth
+	get_tree().change_scene_to_file("res://scenes/galla_gaming.tscn")
