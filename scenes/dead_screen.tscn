@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bs1qn8j7h1yso" path="res://scenes/dead_screen.gd" id="1_5pyt7"]
 [ext_resource type="FontFile" uid="uid://mrqi0t7ikihl" path="res://fonts/upheavtt.ttf" id="1_v8b16"]
 [ext_resource type="Texture2D" uid="uid://bpiqylwq16kjw" path="res://sprites/dialogueBox.png" id="2_5pyt7"]
-[ext_resource type="Texture2D" uid="uid://do3p3f223nlfa" path="res://sprites/kingP1Portrait.png" id="3_qaisq"]
+[ext_resource type="Texture2D" uid="uid://dosv4kche52ht" path="res://sprites/friend.png" id="4_5pyt7"]
 [ext_resource type="Texture2D" uid="uid://dhomkr5dgg8qg" path="res://sprites/Player-Sheet.png" id="4_mws2h"]
 [ext_resource type="PackedScene" uid="uid://dw0ibicklg1pj" path="res://scenes/card.tscn" id="5_3bdp4"]
 [ext_resource type="Shader" uid="uid://dhslrtrd82nds" path="res://shaders/vignette.gdshader" id="6_33e7q"]
@@ -45,10 +45,12 @@ scale = Vector2(1, -1)
 texture = ExtResource("2_5pyt7")
 
 [node name="KingP1Portrait" type="Sprite2D" parent="Label"]
-position = Vector2(810, 74)
+position = Vector2(820, 59)
 rotation = 3.14159
-scale = Vector2(1, -1)
-texture = ExtResource("3_qaisq")
+scale = Vector2(0.6, -0.6)
+texture = ExtResource("4_5pyt7")
+region_enabled = true
+region_rect = Rect2(0, 0, 240, 240)
 
 [node name="Player Box" type="Sprite2D" parent="."]
 show_behind_parent = true

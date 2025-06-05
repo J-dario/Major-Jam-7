@@ -23,7 +23,6 @@ func _ready() -> void:
 	scale = Vector2.ZERO
 
 func display_text(text_to_dispaly: String, speech_sfx: AudioStream):
-	print("leeter")
 	text = text_to_dispaly
 	label.text = text_to_dispaly
 	audio_stream_player.stream = speech_sfx

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cquja40korh62"]
+
+[node name="Tele" type="CPUParticles2D"]
+emitting = false
+amount = 64
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 13.01
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+radial_accel_min = -100.0

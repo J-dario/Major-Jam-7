@@ -17,7 +17,6 @@ var can_advance_line = false
 var sfx: AudioStream
 
 func start_dialog(position: Vector2, lines: Array[String], speech_sfx: AudioStream):
-	print("STARING")
 	if is_active:
 		return
 	
@@ -50,7 +49,6 @@ func _unhandled_input(event):
 		if current_line_index >= dialog_lines.size():
 			is_active = false
 			current_line_index = 0
-			print("emitting signal...")
 			DialogManager.emit_signal("done")
 			return
 			

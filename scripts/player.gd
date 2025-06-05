@@ -12,7 +12,6 @@ extends CharacterBody2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var audio_stream_player_2d_4: AudioStreamPlayer2D = $AudioStreamPlayer2D4
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
-@onready var PICKUP_COIN__3_ = preload("res://sounds/pickupCoin (3).wav")
 
 const DODGE_SPEED: float = 800.0
 const DODGE_DURATION: float = 0.3
@@ -46,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = false
 		shuriken.position.x = 25
 	
-	if DialogManager.is_active == true:
+	if GameManager.playerCanMove == false:
 		return
 		
 	var input_vector = Vector2(

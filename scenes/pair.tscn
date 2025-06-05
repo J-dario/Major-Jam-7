@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpcxma7dtax00"]
+
+[ext_resource type="PackedScene" uid="uid://dxp3dly66140i" path="res://scenes/rotatingBullet.tscn" id="1_qbmen"]
+
+[node name="Pair" type="Node2D"]
+rotation = 0.0167509
+
+[node name="Bullet" parent="." instance=ExtResource("1_qbmen")]
+
+[node name="Bullet2" parent="." instance=ExtResource("1_qbmen")]
+
+[editable path="Bullet"]

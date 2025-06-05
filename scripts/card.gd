@@ -25,7 +25,7 @@ func _on_button_pressed() -> void:
 	if badgeType == 0:
 		GameManager.playerHealthBar.healthUP()
 	elif badgeType == 1:
-		GameManager.playerDamage += 1
+		GameManager.playerDamage += 0.5
 	elif badgeType == 2:
 		GameManager.timeBetweenShots -= 0.25
 		GameManager.shurikenGun.changeAS(GameManager.timeBetweenShots)
@@ -38,7 +38,7 @@ func _on_button_pressed() -> void:
 			GameManager.playerHealthBar.healthUP()
 			GameManager.playerHealthBar.healthUP()
 		elif RbadgeType == 1:
-			GameManager.playerDamage += 2
+			GameManager.playerDamage += 1
 		elif RbadgeType == 2:
 			GameManager.timeBetweenShots -= 0.5
 			GameManager.shurikenGun.changeAS(GameManager.timeBetweenShots)

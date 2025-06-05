@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cagxbk30vi01w"]
+
+[ext_resource type="PackedScene" uid="uid://vtgy43d3rns6" path="res://scenes/bullet.tscn" id="1_2odsn"]
+
+[node name="TripleShot" type="Node2D"]
+
+[node name="Bullet" parent="." instance=ExtResource("1_2odsn")]
+
+[node name="Bullet2" parent="." instance=ExtResource("1_2odsn")]
+rotation = 0.349066
+
+[node name="Bullet3" parent="." instance=ExtResource("1_2odsn")]
+rotation = -0.349066

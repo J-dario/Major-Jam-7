@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://3mcmvgfcak6u"]
+[gd_scene load_steps=23 format=3 uid="uid://3mcmvgfcak6u"]
 
 [ext_resource type="Script" uid="uid://dqbkm2l5u7s6k" path="res://scenes/etg.gd" id="1_pivms"]
 [ext_resource type="PackedScene" uid="uid://hpahw4ei3nqg" path="res://scenes/player.tscn" id="2_cmw7p"]
@@ -219,40 +219,17 @@ shader = ExtResource("3_d8cix")
 shader_parameter/hit_flash_color = Color(1, 1, 1, 1)
 shader_parameter/hit_flash_on = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2cxr"]
+resource_local_to_scene = true
+shader = ExtResource("3_d8cix")
+shader_parameter/hit_flash_color = Color(1, 1, 1, 1)
+shader_parameter/hit_flash_on = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jw310"]
 shader = ExtResource("7_lnovr")
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_1mfsc"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect2")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_pivms"]
 length = 0.001
@@ -305,6 +282,35 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_1mfsc"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_j2cxr"]
 resource_name = "intro"
 tracks/0/type = "value"
@@ -343,6 +349,34 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../player/AudioStreamPlayer2D5")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%King/Staff")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"beginShootin"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j2cxr"]
 _data = {
@@ -378,9 +412,15 @@ material = SubResource("ShaderMaterial_pivms")
 [node name="Camera2D" type="Camera2D" parent="player"]
 script = ExtResource("3_1tan0")
 
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("12_j2cxr")
+
 [node name="King" parent="." instance=ExtResource("4_qsd7d")]
 unique_name_in_owner = true
 position = Vector2(581, -293)
+
+[node name="Sprite2D" parent="King" index="0"]
+material = SubResource("ShaderMaterial_j2cxr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -395,6 +435,26 @@ offset_left = 196.0
 offset_top = 967.0
 offset_right = 7601.0
 offset_bottom = 1127.0
+
+[node name="HealthBar2" parent="CanvasLayer" instance=ExtResource("4_y6ttt")]
+visible = false
+offset_left = 196.0
+offset_top = 967.0
+offset_right = 7601.0
+offset_bottom = 1127.0
+
+[node name="Label" parent="CanvasLayer/HealthBar2" index="1"]
+text = "Rudenthall The Wrathful - Essence of evolution"
+
+[node name="HealthBar3" parent="CanvasLayer" instance=ExtResource("4_y6ttt")]
+visible = false
+offset_left = 196.0
+offset_top = 967.0
+offset_right = 7601.0
+offset_bottom = 1127.0
+
+[node name="Label" parent="CanvasLayer/HealthBar3" index="1"]
+text = "Winged Rudenthall  - Terror of the skies"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
@@ -425,7 +485,11 @@ shape = SubResource("RectangleShape2D_j2cxr")
 
 [node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_j2cxr")
+volume_db = -80.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 
 [editable path="player"]
+[editable path="King"]
+[editable path="CanvasLayer/HealthBar2"]
+[editable path="CanvasLayer/HealthBar3"]
