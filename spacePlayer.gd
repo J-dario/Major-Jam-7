@@ -14,6 +14,11 @@ const bulletScene = preload("res://scenes/laser_shuriken.tscn")
 
 var isInvincible: bool = false
 var canShoot: bool = true
+var godModde = false
+func makeInvs():
+	print("IO AM CALLED")
+	isInvincible = true
+	godModde = true
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
@@ -49,12 +54,16 @@ func freeze_frame(timescale: float, duration: float) -> void:
 	vignette.visible = false
 	
 func takeDamage():
-	if !isInvincible:
+	
+	if isInvincible or godModde:
+		return
+	else:
 		isInvincible = true
 		player_health_bar.takeDMG()
 		animation_player.play("hit")
 		hurt.play()
 		freeze_frame(0.2, 0.3)
+
 		i_frames.start()
 		
 func _shoot():

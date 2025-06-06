@@ -34,7 +34,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_tkwqk"]
-resource_name = "laserAppear"
+resource_name = "appear"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -62,7 +62,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_5uabj"]
-resource_name = "laserRemove"
+resource_name = "remove"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -92,8 +92,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a86p8"]
 _data = {
 &"RESET": SubResource("Animation_4g3ey"),
-&"laserAppear": SubResource("Animation_tkwqk"),
-&"laserRemove": SubResource("Animation_5uabj")
+&"appear": SubResource("Animation_tkwqk"),
+&"remove": SubResource("Animation_5uabj")
 }
 
 [node name="ShurikenBullet" type="Node2D"]
@@ -110,7 +110,7 @@ root_node = NodePath("../Sprite")
 libraries = {
 &"": SubResource("AnimationLibrary_a86p8")
 }
-autoplay = "laserAppear"
+autoplay = "appear"
 speed_scale = 2.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

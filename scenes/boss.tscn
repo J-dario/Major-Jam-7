@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bes0bn2uen0m3"]
+[gd_scene load_steps=12 format=3 uid="uid://bes0bn2uen0m3"]
 
 [ext_resource type="Texture2D" uid="uid://drha36jrow46o" path="res://sprites/screenWipe.png" id="1_dlmty"]
 [ext_resource type="Script" uid="uid://cjdger0w7k3tr" path="res://scenes/boss.gd" id="1_neq0i"]
 [ext_resource type="AudioStream" uid="uid://6tsacgg4xiq5" path="res://sounds/explosion (3).wav" id="3_jncid"]
+[ext_resource type="AudioStream" uid="uid://c6mwfsaqprvtm" path="res://sounds/sci-fi-charge-up-37395.wav" id="3_qnbj4"]
+[ext_resource type="AudioStream" uid="uid://iya10hrcfgmn" path="res://sounds/hitHurt (2).wav" id="5_r3bxh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jncid"]
 
@@ -14,10 +16,20 @@ colors = PackedColorArray(0.0627451, 0.0784314, 0.121569, 1, 0.0627451, 0.078431
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0727665), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r3bxh"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("3_qnbj4")
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qnbj4"]
 random_pitch = 1.5
 streams_count = 1
 stream_0/stream = ExtResource("3_jncid")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wqpjq"]
+random_pitch = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("5_r3bxh")
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_neq0i")
@@ -78,12 +90,18 @@ scale_amount_min = 4.0
 scale_amount_max = 14.0
 scale_amount_curve = SubResource("Curve_jncid")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Boss/Sprite2D/RotOff/Tell"]
+stream = SubResource("AudioStreamRandomizer_r3bxh")
+
 [node name="hurtSFX" type="AudioStreamPlayer2D" parent="Boss"]
 stream = SubResource("AudioStreamRandomizer_qnbj4")
 volume_db = -15.0
 
+[node name="LASER" type="AudioStreamPlayer2D" parent="Boss/hurtSFX"]
+stream = SubResource("AudioStreamRandomizer_wqpjq")
+volume_db = -10.0
+
 [node name="moveOver" type="Timer" parent="."]
-wait_time = 0.8
 one_shot = true
 
 [node name="volleyTimer" type="Timer" parent="moveOver"]

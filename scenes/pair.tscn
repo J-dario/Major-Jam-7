@@ -7,6 +7,9 @@ rotation = 0.0167509
 
 [node name="Bullet" parent="." instance=ExtResource("1_qbmen")]
 
+[node name="RotatingBulletBody" parent="Bullet/Marker2D" index="0"]
+position = Vector2(0, 50)
+
 [node name="Bullet2" parent="." instance=ExtResource("1_qbmen")]
 
 [editable path="Bullet"]

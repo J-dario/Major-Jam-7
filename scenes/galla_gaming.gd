@@ -14,7 +14,7 @@ var phase1 = true
 func _ready() -> void:
 	GameManager.playerCanMove = false
 	GameManager.enemyCanAttack = false
-	GameManager.bossHealth = 100
+	GameManager.bossHealth = 80
 	GameManager.canvas_layer = canvas_layer
 	health_bar._setup_health_bar(GameManager.bossHealth)
 	DialogManager.connect("done", _dialogEnd)
@@ -26,7 +26,7 @@ func _ready() -> void:
 	print(GameManager.playerDamage)
 
 func begin():
-	DialogManager.start_dialog(boss.global_position - global_position, ["Behold.", "I have trancended human form.", "Now perish.", "..Also I took away your dodge lmao", "try and weave beween this, loser"], PICKUP_COIN__2_)
+	DialogManager.start_dialog(boss.global_position - global_position, ["Behold.", "I have trancended human form.", "..Also I took away your dodge lmao", "try and weave beween these patterns, loser", "I'll even give you the first shot"], PICKUP_COIN__2_)
 
 func _dialogEnd():
 	if phase1:
@@ -34,3 +34,7 @@ func _dialogEnd():
 		GameManager.enemyCanAttack = true
 		animation_player.play("spawnHealthBars")
 		music.play()
+		
+func moveScene():
+	GameManager.currentHealth = GameManager.maxHealth
+	get_tree().change_scene_to_file("res://scenes/end.tscn")

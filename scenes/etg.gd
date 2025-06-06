@@ -31,13 +31,13 @@ func makeDialog():
 	elif GameManager.bossPhase == 3:	
 		GameManager.playerCanMove = false
 		GameManager.enemyCanAttack = false
-		DialogManager.start_dialog(king.global_position - global_position, ["No! No! No!", "This isn't over...", "My guy actually can fly so take that!"], PICKUP_COIN__2_)
+		DialogManager.start_dialog(king.global_position - global_position, ["No! No! No!", "This isn't over..", "My guy actually can fly so.. take that!"], PICKUP_COIN__2_)
 		camera_2d.reparent(king)
 		GameManager.bossPhase += 1
 	elif GameManager.bossPhase == 5:	
 		GameManager.playerCanMove = false
 		GameManager.enemyCanAttack = false
-		DialogManager.start_dialog(king.global_position - global_position, ["ENOUGH!", "I've grown tired of this", "My guy can actually houses the soul of a god!!!"], PICKUP_COIN__2_)
+		DialogManager.start_dialog(king.global_position - global_position, ["ENOUGH!", "I've grown tired of this", "My guy actually houses the soul of a god!!!"], PICKUP_COIN__2_)
 		camera_2d.reparent(king)
 		GameManager.bossPhase += 1
 		

@@ -10,7 +10,7 @@ var shurikenGun
 var playerHealthBar
 
 # Player Stats
-var playerDamage = 10
+var playerDamage = 1
 var timeBetweenShots = 0.5
 var movementSpeed: float = 400.0
 var maxHealth = 2
